@@ -7,6 +7,13 @@ var spear_ammo = 0
 @onready var weapon_addon = $weapon_addon
 @onready var weapons_holder = $Weapons_holder
 
+var cam :Camera2D
+var cam_zoomed:bool = false
+
+func _ready():
+	cam = get_tree().get_nodes_in_group("main_camera")[0]
+
+
 func _physics_process(delta):
 	time_passed += delta
 	
@@ -18,6 +25,13 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("exit"):
 		get_tree().quit()
 		
+	if Input.is_action_just_pressed("zoom"):
+		if cam_zoomed:
+			cam.zoom = Vector2(0.5,0.5)
+			cam_zoomed = false
+		else:
+			cam_zoomed = true
+			cam.zoom = Vector2.ONE
 
 	var direction_x = Input.get_axis("left", "right")
 	var direction_y = Input.get_axis("up", "down")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cv2d1i0dghvxu"]
+[gd_scene load_steps=32 format=3 uid="uid://cv2d1i0dghvxu"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_7uwtw"]
 [ext_resource type="Texture2D" uid="uid://dptlm3jln1l07" path="res://assets/spear1.png" id="2_62t15"]
 [ext_resource type="Texture2D" uid="uid://bmydw6cvrth00" path="res://assets/player-Sheet.png" id="3_l30u2"]
+[ext_resource type="Texture2D" uid="uid://hgbrqnib3cmk" path="res://assets/player_anim/player-Sheet_dead_anim.png" id="4_12xml"]
 [ext_resource type="Texture2D" uid="uid://pqwb4chu16cp" path="res://assets/addons/weapon_strap.png" id="4_uobut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvvho"]
@@ -26,6 +27,42 @@ region = Rect2(432, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_d8bqk"]
 atlas = ExtResource("3_l30u2")
 region = Rect2(464, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cql0p"]
+atlas = ExtResource("4_12xml")
+region = Rect2(9, 8, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0r6k"]
+atlas = ExtResource("4_12xml")
+region = Rect2(73, 8, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndwp7"]
+atlas = ExtResource("4_12xml")
+region = Rect2(137, 8, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3vx5"]
+atlas = ExtResource("4_12xml")
+region = Rect2(201, 8, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdg4r"]
+atlas = ExtResource("4_12xml")
+region = Rect2(265, 8, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nytrp"]
+atlas = ExtResource("4_12xml")
+region = Rect2(329, 8, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_go8v5"]
+atlas = ExtResource("4_12xml")
+region = Rect2(393, 8, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfnrv"]
+atlas = ExtResource("4_12xml")
+region = Rect2(457, 8, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52wtv"]
+atlas = ExtResource("4_12xml")
+region = Rect2(521, 8, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uxj61"]
 atlas = ExtResource("3_l30u2")
@@ -90,6 +127,38 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_cql0p")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_g0r6k")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_ndwp7")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_h3vx5")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_cdg4r")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_nytrp")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_go8v5")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_gfnrv")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_52wtv")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uxj61")
 }, {
@@ -147,7 +216,8 @@ shape = SubResource("RectangleShape2D_pvvho")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1p1vm")
-animation = &"walk"
+animation = &"dead"
+frame_progress = 0.366721
 
 [node name="weapon_addon" type="Sprite2D" parent="."]
 position = Vector2(0, 3.33333)

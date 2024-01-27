@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbceob5h7ciue"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_4nc1e"]
+[ext_resource type="Texture2D" uid="uid://b43306s7xcqx3" path="res://icon.svg" id="1_cmsmi"]
+[ext_resource type="PackedScene" uid="uid://ndeaattpho65" path="res://danger_zone.tscn" id="2_bdgbl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xs3r"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_4nc1e")
+marker = ExtResource("2_bdgbl")
+landing_vel = 500
+jumping_vel = -1800
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.160784, 0.160784, 1)
+texture = ExtResource("1_cmsmi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8xs3r")
+
+[node name="Attack" type="Timer" parent="."]
+wait_time = 2.2
+one_shot = true
+
+[connection signal="ready" from="Attack" to="." method="_on_timer_ready"]
+[connection signal="timeout" from="Attack" to="." method="_on_timer_timeout"]

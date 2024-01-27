@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://2x1k7uk3cquv"]
+
+[ext_resource type="PackedScene" uid="uid://cbceob5h7ciue" path="res://enemy.tscn" id="1_yvh77"]
+[ext_resource type="PackedScene" uid="uid://cv2d1i0dghvxu" path="res://character_body_2d.tscn" id="2_mqyrb"]
+[ext_resource type="PackedScene" uid="uid://dhiu4k1kkt0jj" path="res://spear.tscn" id="3_tmtge"]
+
+[node name="world" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["main_camera"]]
+position = Vector2(575, 319)
+
+[node name="Enemy" parent="." instance=ExtResource("1_yvh77")]
+position = Vector2(180, 224)
+
+[node name="Player" parent="." instance=ExtResource("2_mqyrb")]
+position = Vector2(869, 210)
+
+[node name="Node2D" parent="." instance=ExtResource("3_tmtge")]
+position = Vector2(708, 219)

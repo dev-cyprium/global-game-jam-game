@@ -32,6 +32,7 @@ func _physics_process(_delta):
 	
 	match state:
 		State.JUMP:
+			$Particles.emitting = true
 			var camera_top_boundary = (
 				camera.global_position.y - get_viewport().size.y / 2
 			)
@@ -48,7 +49,7 @@ func _physics_process(_delta):
 				current_target = null
 				attack.start()
 				state = State.IDLE
-				$Particles.emitting = true
+				$Particles.emitting = false
 			
 			move_and_slide()
 	

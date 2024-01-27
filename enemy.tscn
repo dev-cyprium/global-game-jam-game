@@ -65,6 +65,11 @@ texture = ExtResource("3_gsmcq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8xs3r")
+disabled = true
+
+[node name="Chase" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
 
 [node name="Attack" type="Timer" parent="."]
 wait_time = 2.2
@@ -92,4 +97,5 @@ color_ramp = SubResource("Gradient_b0puo")
 hue_variation_min = 0.5
 hue_variation_max = 0.5
 
+[connection signal="timeout" from="Chase" to="." method="_on_chase_timeout"]
 [connection signal="timeout" from="Attack" to="." method="_on_timer_timeout"]

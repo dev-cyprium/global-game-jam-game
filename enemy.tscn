@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://okvv7du47agf"]
+[gd_scene load_steps=12 format=3 uid="uid://okvv7du47agf"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_4nc1e"]
 [ext_resource type="PackedScene" uid="uid://ndeaattpho65" path="res://danger_zone.tscn" id="2_bdgbl"]
@@ -51,6 +51,9 @@ _data = {
 [sub_resource type="Gradient" id="Gradient_b0puo"]
 colors = PackedColorArray(0.826088, 1, 0.80839, 1, 1, 1, 1, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_21v42"]
+radius = 17.9897
+
 [node name="Enemy" type="CharacterBody2D"]
 scale = Vector2(1.00212, 1)
 script = ExtResource("1_4nc1e")
@@ -97,5 +100,12 @@ color_ramp = SubResource("Gradient_b0puo")
 hue_variation_min = 0.5
 hue_variation_max = 0.5
 
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_21v42")
+
 [connection signal="timeout" from="Chase" to="." method="_on_chase_timeout"]
 [connection signal="timeout" from="Attack" to="." method="_on_timer_timeout"]
+[connection signal="area_shape_entered" from="Hurtbox" to="." method="_on_hurtbox_area_shape_entered"]

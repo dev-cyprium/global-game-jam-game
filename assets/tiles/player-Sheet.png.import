@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmydw6cvrth00"
-path="res://.godot/imported/player-Sheet.png-e3c154d5ac105d5fd0b34c7be8c3a055.ctex"
+uid="uid://cra4ntb8vfmjn"
+path="res://.godot/imported/player-Sheet.png-585869de12745d7a8a9ef7642e5f5b46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player-Sheet.png"
-dest_files=["res://.godot/imported/player-Sheet.png-e3c154d5ac105d5fd0b34c7be8c3a055.ctex"]
+source_file="res://assets/tiles/player-Sheet.png"
+dest_files=["res://.godot/imported/player-Sheet.png-585869de12745d7a8a9ef7642e5f5b46.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

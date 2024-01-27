@@ -4,6 +4,7 @@ extends CharacterBody2D
 var player: Node2D
 var speed: float = 300.0
 var current_target = null
+@export var hp:float = 100.0
 
 @export var marker: PackedScene
 var camera: Camera2D
@@ -28,6 +29,10 @@ var current_attack = null
 @export var chase_speed = 250
 
 func _physics_process(delta):
+	
+	if hp <=0:
+		death()
+	
 	var current_target_pos = null
 	if current_target != null:
 		current_target_pos = current_target.global_position
@@ -87,3 +92,15 @@ func _on_chase_timeout():
 	attack.start()
 	current_target = null
 	state = State.IDLE
+
+
+func _on_hurtbox_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if area.is_in_group("weapons"):
+		take_dmg(area.dmg)
+
+func death():
+	pass
+
+func take_dmg(dmg):
+	hp -= dmg
+	print("Current hp: ", hp)

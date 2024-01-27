@@ -1,20 +1,67 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbceob5h7ciue"]
+[gd_scene load_steps=11 format=3 uid="uid://okvv7du47agf"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_4nc1e"]
-[ext_resource type="Texture2D" uid="uid://b43306s7xcqx3" path="res://icon.svg" id="1_cmsmi"]
 [ext_resource type="PackedScene" uid="uid://ndeaattpho65" path="res://danger_zone.tscn" id="2_bdgbl"]
+[ext_resource type="Texture2D" uid="uid://llo70mjf23ii" path="res://assets/Slime.png" id="3_gsmcq"]
+[ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="3_tsee2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_33abb"]
+shader = ExtResource("3_tsee2")
+shader_parameter/squish_scale = 4.75e-07
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xs3r"]
 
+[sub_resource type="Animation" id="Animation_4s1hg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/squish_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.75e-07]
+}
+
+[sub_resource type="Animation" id="Animation_cjmuy"]
+resource_name = "jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/squish_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [4.75e-07, 2.0, 4.75e-07]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4qlrv"]
+_data = {
+"RESET": SubResource("Animation_4s1hg"),
+"jump": SubResource("Animation_cjmuy")
+}
+
+[sub_resource type="Gradient" id="Gradient_b0puo"]
+colors = PackedColorArray(0.826088, 1, 0.80839, 1, 1, 1, 1, 1)
+
 [node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(1.00212, 1)
 script = ExtResource("1_4nc1e")
 marker = ExtResource("2_bdgbl")
 landing_vel = 500
 jumping_vel = -1800
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.160784, 0.160784, 1)
-texture = ExtResource("1_cmsmi")
+material = SubResource("ShaderMaterial_33abb")
+scale = Vector2(6, 6.761)
+texture = ExtResource("3_gsmcq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8xs3r")
@@ -23,5 +70,25 @@ shape = SubResource("RectangleShape2D_8xs3r")
 wait_time = 2.2
 one_shot = true
 
-[connection signal="ready" from="Attack" to="." method="_on_timer_ready"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4qlrv")
+}
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+position = Vector2(11.9746, -17)
+amount = 80
+lifetime = 0.8
+lifetime_randomness = 0.5
+texture = ExtResource("3_gsmcq")
+emission_shape = 1
+emission_sphere_radius = 35.0
+direction = Vector2(1, 1)
+gravity = Vector2(0, 0)
+angular_velocity_min = -360.0
+scale_amount_min = 0.3
+color_ramp = SubResource("Gradient_b0puo")
+hue_variation_min = 0.5
+hue_variation_max = 0.5
+
 [connection signal="timeout" from="Attack" to="." method="_on_timer_timeout"]

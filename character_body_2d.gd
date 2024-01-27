@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 600.0
+const SPEED = 300.0
 var time_passed = 0
 var spear_ammo = 0
 

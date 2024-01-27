@@ -12,8 +12,9 @@ var camera: Camera2D
 
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0]
-	attack.start()
 	camera = get_tree().get_first_node_in_group("main_camera")
+	attack.start()
+
 
 enum Attacks { LONG_STOMP, SPEW }
 enum State { JUMP, LANDING, IDLE }
@@ -24,7 +25,7 @@ const attack_opts = [Attacks.LONG_STOMP, Attacks.SPEW]
 @export var landing_vel = 100
 @export var jumping_vel = -400
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var current_target_pos = null
 	if current_target != null:
 		current_target_pos = current_target.global_position
@@ -47,6 +48,7 @@ func _physics_process(delta):
 				current_target = null
 				attack.start()
 				state = State.IDLE
+				$Particles.emitting = true
 			
 			move_and_slide()
 	
@@ -61,6 +63,9 @@ func _on_timer_timeout():
 func do_attack(atk_type):
 	match atk_type:
 		Attacks.LONG_STOMP:
+			$AnimationPlayer.play("jump")
+			await $AnimationPlayer.animation_finished
+			$AnimationPlayer.play("RESET")
 			var inst = marker.instantiate()
 			inst.global_position = player.global_position
 			current_target = inst

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://llo70mjf23ii"
-path="res://.godot/imported/Slime.png-f2eed1b5834342ec7cfd7db5a8e0cbfc.ctex"
+uid="uid://dfvbnkgr8t3e3"
+path="res://.godot/imported/hearth.png-cc2becc312dc1e112bd4d7d3be1e5e07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Slime.png"
-dest_files=["res://.godot/imported/Slime.png-f2eed1b5834342ec7cfd7db5a8e0cbfc.ctex"]
+source_file="res://assets/GUI/hearth.png"
+dest_files=["res://.godot/imported/hearth.png-cc2becc312dc1e112bd4d7d3be1e5e07.ctex"]
 
 [params]
 

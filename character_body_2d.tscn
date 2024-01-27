@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://cv2d1i0dghvxu"]
+[gd_scene load_steps=22 format=3 uid="uid://cv2d1i0dghvxu"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_7uwtw"]
-[ext_resource type="Texture2D" uid="uid://b0f4xaswvvvg2" path="res://assets/player.png" id="2_tm0bl"]
+[ext_resource type="Texture2D" uid="uid://dptlm3jln1l07" path="res://assets/spear1.png" id="2_62t15"]
 [ext_resource type="Texture2D" uid="uid://bmydw6cvrth00" path="res://assets/player-Sheet.png" id="3_l30u2"]
+[ext_resource type="Texture2D" uid="uid://pqwb4chu16cp" path="res://assets/addons/weapon_strap.png" id="4_uobut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvvho"]
 
@@ -106,22 +107,22 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_wkqji")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_h6b72")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_xoig2")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_opj68")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_etw00")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_hiv0n")
 }],
 "loop": true,
@@ -130,13 +131,14 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-scale = Vector2(0.3, 0.3)
 script = ExtResource("1_7uwtw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Weapons_holder" type="Node2D" parent="."]
 visible = false
-scale = Vector2(10, 10)
-texture = ExtResource("2_tm0bl")
+position = Vector2(0, -6.66667)
+
+[node name="Weapon" type="Sprite2D" parent="Weapons_holder"]
+texture = ExtResource("2_62t15")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pvvho")
@@ -144,8 +146,9 @@ shape = SubResource("RectangleShape2D_pvvho")
 [node name="WeaponManager" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_1p1vm")
-animation = &"attack"
-frame = 4
-frame_progress = 0.989671
+animation = &"walk"
+
+[node name="weapon_addon" type="Sprite2D" parent="."]
+position = Vector2(0, 3.33333)
+texture = ExtResource("4_uobut")

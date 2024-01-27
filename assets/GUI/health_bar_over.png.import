@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://llo70mjf23ii"
-path="res://.godot/imported/Slime.png-f2eed1b5834342ec7cfd7db5a8e0cbfc.ctex"
+uid="uid://btw0g4wvp6cbk"
+path="res://.godot/imported/health_bar_over.png-26ec8c18fbe8f877edb14bc002d0a93e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Slime.png"
-dest_files=["res://.godot/imported/Slime.png-f2eed1b5834342ec7cfd7db5a8e0cbfc.ctex"]
+source_file="res://assets/GUI/health_bar_over.png"
+dest_files=["res://.godot/imported/health_bar_over.png-26ec8c18fbe8f877edb14bc002d0a93e.ctex"]
 
 [params]
 

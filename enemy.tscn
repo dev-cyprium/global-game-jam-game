@@ -60,7 +60,7 @@ jumping_vel = -1800
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_33abb")
-scale = Vector2(6, 6.761)
+scale = Vector2(1.775, 2)
 texture = ExtResource("3_gsmcq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

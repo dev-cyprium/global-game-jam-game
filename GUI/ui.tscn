@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsbkmw42kyj6a"]
+
+[ext_resource type="PackedScene" uid="uid://s6hcn8hlcou3" path="res://health_bar/health_bar.tscn" id="1_u57pk"]
+[ext_resource type="FontFile" uid="uid://0sqbsdys5sti" path="res://assets/fonts/Pixeled.ttf" id="3_5riek"]
+[ext_resource type="PackedScene" uid="uid://x1l5obms2ugn" path="res://health_bar/funny_bar.tscn" id="3_hfgwt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cwsqo"]
+line_spacing = 2.0
+font = ExtResource("3_5riek")
+font_color = Color(0.886275, 0.160784, 0.164706, 1)
+shadow_size = 3
+shadow_color = Color(0.34902, 0, 0, 0.278431)
+shadow_offset = Vector2(2, 2)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="MC bot" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 40
+
+[node name="TextureProgressBar" parent="MC bot" instance=ExtResource("1_u57pk")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="FunnyBar" parent="MC bot" instance=ExtResource("3_hfgwt")]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="MC top" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 30
+
+[node name="Label" type="Label" parent="MC top"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TITLE TEXT
+"
+label_settings = SubResource("LabelSettings_cwsqo")
+horizontal_alignment = 1
+vertical_alignment = 1

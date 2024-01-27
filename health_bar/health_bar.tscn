@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://s6hcn8hlcou3"]
+
+[ext_resource type="Texture2D" uid="uid://btw0g4wvp6cbk" path="res://assets/GUI/health_bar_over.png" id="1_k667s"]
+[ext_resource type="Texture2D" uid="uid://h8wmghvikwc" path="res://assets/GUI/health_bar.png" id="2_6ra8q"]
+[ext_resource type="Texture2D" uid="uid://dfvbnkgr8t3e3" path="res://assets/GUI/hearth.png" id="3_awyto"]
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 50.0
+texture_over = ExtResource("1_k667s")
+texture_progress = ExtResource("2_6ra8q")
+texture_progress_offset = Vector2(3, 4)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = -41.0
+offset_right = 54.0
+offset_bottom = -1.0
+texture = ExtResource("3_awyto")

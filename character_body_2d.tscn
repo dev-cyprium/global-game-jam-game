@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cv2d1i0dghvxu"]
+[gd_scene load_steps=15 format=3 uid="uid://cv2d1i0dghvxu"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_7uwtw"]
 [ext_resource type="Texture2D" uid="uid://dptlm3jln1l07" path="res://assets/spear1.png" id="2_62t15"]
@@ -102,16 +102,37 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_mqkty"]
+resource_name = "dmg"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.8, 1),
+"transitions": PackedFloat32Array(0.482968, 1, 0.189464, 1, 0.189464),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqwdh"]
 _data = {
 "RESET": SubResource("Animation_lxcwv"),
 "dancing": SubResource("Animation_erljh"),
 "death": SubResource("Animation_qwi4f"),
+"dmg": SubResource("Animation_mqkty"),
 "idle": SubResource("Animation_75lsb"),
 "walk": SubResource("Animation_s05ij")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mimkk"]
+radius = 24.0208
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+self_modulate = Color(1, 1, 1, 0.841044)
 script = ExtResource("1_7uwtw")
 
 [node name="Weapons_holder" type="Node2D" parent="."]
@@ -141,4 +162,10 @@ autoplay = "idle"
 position = Vector2(0, 3.33333)
 texture = ExtResource("4_uobut")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mimkk")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

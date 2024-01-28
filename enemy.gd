@@ -94,13 +94,14 @@ func _on_chase_timeout():
 	state = State.IDLE
 
 
-func _on_hurtbox_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if area.is_in_group("weapons"):
-		take_dmg(area.dmg)
-
 func death():
 	pass
 
 func take_dmg(dmg):
 	hp -= dmg
 	print("Current hp: ", hp)
+
+
+func _on_hurtbox_area_entered(area):
+		if area.is_in_group("weapons"):
+			take_dmg(area.dmg)

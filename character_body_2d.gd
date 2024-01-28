@@ -3,8 +3,9 @@ extends CharacterBody2D
 const SPEED = 300.0
 var time_passed = 0
 var spear_ammo = 0
+var hp:float
 
-@export var hp:float = 100.0
+@export var max_hp:float = 100.0
 
 @onready var weapon_manager = $WeaponManager
 @onready var main_sprites = $MainSprites
@@ -19,9 +20,12 @@ var dancing:bool = false
 
 func _ready():
 	cam = get_tree().get_nodes_in_group("main_camera")[0]
+	hp = max_hp
 
 
 func _physics_process(delta):
+	
+
 	time_passed += delta
 	
 	if spear_ammo:
@@ -87,7 +91,21 @@ func death():
 func take_dmg(dmg):
 	hp -= dmg
 
+func heal(amount):
+	hp += amount
+	hp = clamp(hp,0,max_hp)
+	print("Current hp: ",hp)
+
 
 func _on_animation_player_animation_finished(anim_name):
 	pass
 		#call change scene
+
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("consumable"):
+		heal(10)
+		print(area.name)
+		area.queue_free()
+

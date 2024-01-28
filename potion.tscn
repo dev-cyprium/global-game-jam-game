@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2gbxipxk7hcs"]
+
+[ext_resource type="Texture2D" uid="uid://i56imc5mnbtc" path="res://assets/weapons/potion_hp.png" id="1_yv6yr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rhhgp"]
+radius = 14.0
+
+[node name="Potion" type="Area2D" groups=["consumable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rhhgp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yv6yr")

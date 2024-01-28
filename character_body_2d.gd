@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal on_player_hp_changed(amount:float)
+signal on_player_death()
+
 const SPEED = 300.0
 var time_passed = 0
 var spear_ammo = 0
@@ -13,7 +16,6 @@ var hp:float
 @onready var weapon_addon = $weapon_addon
 @onready var weapons_holder = $Weapons_holder
 @onready var animation_player = $AnimationPlayer
-@onready var timer = $Timer
 @onready var animation_player_2 = $AnimationPlayer2
 
 var cam :Camera2D
@@ -24,14 +26,15 @@ var is_blinking:bool = false
 func _ready():
 	cam = get_tree().get_nodes_in_group("main_camera")[0]
 	hp = max_hp
+	on_player_hp_changed.emit(hp)
 
 
 func _physics_process(delta):
 	
 	
 	if is_blinking:
-		print("blinking")
-		#play animation of blinking
+		animation_player_2.play("dmg")
+		is_blinking = false
 
 	time_passed += delta
 	
@@ -85,31 +88,27 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func attack():
+func attack() ->void:
 	weapon_manager.fire_weapon()
 
 
-func death():
+func death() -> void:
 	animation_player.play("death")
 	weapon_addon.visible = false
 	set_physics_process(false)
 	print("dead")
 
-func take_dmg(dmg):
+func take_dmg(dmg: float) -> void:
 	hp -= dmg
 	is_blinking = true
-	timer.start()
+	on_player_hp_changed.emit(hp)
+	print("Current hp: ", hp)
 
-func heal(amount):
+func heal(amount: float) ->void:
 	hp += amount
 	hp = clamp(hp,0,max_hp)
+	on_player_hp_changed.emit(hp)
 	print("Current hp: ",hp)
-
-
-func _on_animation_player_animation_finished(anim_name):
-	pass
-		#call change scene
-
 
 
 func _on_area_2d_area_entered(area):
@@ -118,9 +117,3 @@ func _on_area_2d_area_entered(area):
 		print(area.name)
 		area.queue_free()
 
-
-
-func _on_timer_timeout():
-	print("timer running")
-	is_blinking = false
-	animation_player.stop()

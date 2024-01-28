@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsbkmw42kyj6a"]
+[gd_scene load_steps=6 format=3 uid="uid://bsbkmw42kyj6a"]
 
+[ext_resource type="Script" path="res://GUI/ui.gd" id="1_kf4b6"]
 [ext_resource type="PackedScene" uid="uid://s6hcn8hlcou3" path="res://health_bar/health_bar.tscn" id="1_u57pk"]
 [ext_resource type="FontFile" uid="uid://0sqbsdys5sti" path="res://assets/fonts/Pixeled.ttf" id="3_5riek"]
 [ext_resource type="PackedScene" uid="uid://x1l5obms2ugn" path="res://health_bar/funny_bar.tscn" id="3_hfgwt"]
@@ -20,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
+script = ExtResource("1_kf4b6")
 
 [node name="MC bot" type="MarginContainer" parent="."]
 layout_mode = 1

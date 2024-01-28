@@ -59,6 +59,7 @@ func _physics_process(delta):
 				attack.start()
 				state = State.IDLE
 				$Particles.emitting = false
+				camera.applay_shake()
 			
 			move_and_slide()
 	
@@ -96,10 +97,10 @@ func _on_chase_timeout():
 	state = State.IDLE
 
 
-func death():
+func death() -> void:
 	pass
 
-func take_dmg(dmg):
+func take_dmg(dmg: float) -> void:
 	hp -= dmg
 	print("Current hp: ", hp)
 

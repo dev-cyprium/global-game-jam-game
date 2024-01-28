@@ -13,10 +13,13 @@ var hp:float
 @onready var weapon_addon = $weapon_addon
 @onready var weapons_holder = $Weapons_holder
 @onready var animation_player = $AnimationPlayer
+@onready var timer = $Timer
+@onready var animation_player_2 = $AnimationPlayer2
 
 var cam :Camera2D
 var cam_zoomed:bool = false
 var dancing:bool = false
+var is_blinking:bool = false
 
 func _ready():
 	cam = get_tree().get_nodes_in_group("main_camera")[0]
@@ -25,6 +28,10 @@ func _ready():
 
 func _physics_process(delta):
 	
+	
+	if is_blinking:
+		print("blinking")
+		#play animation of blinking
 
 	time_passed += delta
 	
@@ -90,6 +97,8 @@ func death():
 
 func take_dmg(dmg):
 	hp -= dmg
+	is_blinking = true
+	timer.start()
 
 func heal(amount):
 	hp += amount
@@ -109,3 +118,9 @@ func _on_area_2d_area_entered(area):
 		print(area.name)
 		area.queue_free()
 
+
+
+func _on_timer_timeout():
+	print("timer running")
+	is_blinking = false
+	animation_player.stop()

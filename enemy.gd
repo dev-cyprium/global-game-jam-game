@@ -4,6 +4,8 @@ extends CharacterBody2D
 var player: Node2D
 var speed: float = 300.0
 var current_target = null
+
+@export var dmg:float = 10.0
 @export var hp:float = 100.0
 
 @export var marker: PackedScene
@@ -103,5 +105,10 @@ func take_dmg(dmg):
 
 
 func _on_hurtbox_area_entered(area):
-		if area.is_in_group("weapons"):
-			take_dmg(area.dmg)
+	print(area.name)
+	
+	if area.is_in_group("weapons"):
+		take_dmg(area.dmg)
+	if area.is_in_group("player"):
+		print("dmg")
+		area.get_parent().take_dmg(dmg)

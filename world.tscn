@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://2x1k7uk3cquv"]
 
-[ext_resource type="PackedScene" uid="uid://dgi474equ6qkj" path="res://walls_tilemap.tscn" id="1_k0r6u"]
-[ext_resource type="TileSet" uid="uid://ceg0fywk1m75t" path="res://tile_map.tres" id="1_ositu"]
+[ext_resource type="PackedScene" path="res://walls_tilemap.tscn" id="1_k0r6u"]
+[ext_resource type="TileSet" uid="uid://bwdcumawdtgm6" path="res://tile_map.tres" id="1_ositu"]
 [ext_resource type="PackedScene" uid="uid://okvv7du47agf" path="res://enemy.tscn" id="1_yvh77"]
 [ext_resource type="PackedScene" uid="uid://cv2d1i0dghvxu" path="res://character_body_2d.tscn" id="2_mqyrb"]
 [ext_resource type="PackedScene" uid="uid://dhiu4k1kkt0jj" path="res://spear.tscn" id="3_tmtge"]
 [ext_resource type="PackedScene" uid="uid://bbq5d4f6nrj8n" path="res://camera/camera_2d.tscn" id="3_wcibk"]
 [ext_resource type="PackedScene" uid="uid://bsbkmw42kyj6a" path="res://GUI/ui.tscn" id="5_xv0e7"]
 [ext_resource type="PackedScene" uid="uid://bqnxg33ac6xet" path="res://GUI/game_over.tscn" id="6_38ah0"]
-[ext_resource type="PackedScene" uid="uid://c2gbxipxk7hcs" path="res://potion.tscn" id="8_k68a4"]
+[ext_resource type="PackedScene" path="res://potion.tscn" id="8_k68a4"]
 
 [node name="world" type="Node2D"]
 
@@ -49,3 +49,6 @@ position = Vector2(375, 337)
 
 [node name="Potion3" parent="." instance=ExtResource("8_k68a4")]
 position = Vector2(603, 373)
+
+[node name="Trails" type="Node2D" parent="."]
+unique_name_in_owner = true

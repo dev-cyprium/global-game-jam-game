@@ -106,6 +106,10 @@ hue_variation_max = 0.5
 position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_21v42")
 
+[node name="SlimeSpawn" type="Timer" parent="."]
+wait_time = 0.2
+
 [connection signal="timeout" from="Chase" to="." method="_on_chase_timeout"]
 [connection signal="timeout" from="Attack" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="SlimeSpawn" to="." method="_on_slime_spawn_timeout"]

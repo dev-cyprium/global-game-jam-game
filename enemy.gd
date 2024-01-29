@@ -10,14 +10,19 @@ var current_target = null
 
 @export var marker: PackedScene
 var camera: Camera2D
-
 @onready var attack = $Attack
+
+var trails = []
 
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0]
 	camera = get_tree().get_first_node_in_group("main_camera")
 	attack.start()
+	$SlimeSpawn.start()
 
+func _exit_tree():
+	for trail in trails:
+		%Trails.remove_child(trail)
 
 enum Attacks { LONG_STOMP, CHASE, SPEW }
 enum State { JUMP, LANDING, IDLE, CHASE }
@@ -73,6 +78,7 @@ func _physics_process(delta):
 
 func _on_timer_timeout():
 	current_attack = attack_opts.pick_random()
+	#current_attack = attack_opts[1]
 	do_attack(current_attack)
 	
 func do_attack(atk_type):
@@ -88,6 +94,11 @@ func do_attack(atk_type):
 		Attacks.CHASE:
 			$Chase.start()
 			state = State.CHASE
+			var trail = Line2D.new()
+			trail.width = 10
+			trail.default_color = Color.LAWN_GREEN
+			%Trails.add_child(trail)
+			trails.append(trail)
 			current_target = player
 
 
@@ -100,10 +111,9 @@ func _on_chase_timeout():
 func death() -> void:
 	pass
 
-func take_dmg(dmg: float) -> void:
-	hp -= dmg
+func take_dmg(taken_dmg: float) -> void:
+	hp -= taken_dmg
 	print("Current hp: ", hp)
-
 
 func _on_hurtbox_area_entered(area):
 	print(area.name)
@@ -113,3 +123,7 @@ func _on_hurtbox_area_entered(area):
 	if area.is_in_group("player"):
 		print("dmg")
 		area.get_parent().take_dmg(dmg)
+
+func _on_slime_spawn_timeout():
+	if state == State.CHASE:
+		trails[-1].add_point(global_position)

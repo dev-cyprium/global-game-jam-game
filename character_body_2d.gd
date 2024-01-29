@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 signal on_player_hp_changed(amount:float)
 signal on_player_death()
 
@@ -29,18 +31,17 @@ func _ready():
 	hp = max_hp
 	on_player_hp_changed.emit(hp)
 
-
 func _physics_process(delta):
-	
-	
 	if is_blinking:
 		animation_player_2.play("dmg")
 		is_blinking = false
 
 	time_passed += delta
 	
-	if spear_ammo:
+	if spear_ammo > 0:
 		weapons_holder.visible = true
+	else:
+		weapons_holder.visible = false
 		#make visible spear and addons
 		
 	
@@ -60,8 +61,6 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("spear"):
 		attack()
-		
-	
 	
 	#Animation checks
 	

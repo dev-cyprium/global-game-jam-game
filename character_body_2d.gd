@@ -25,6 +25,7 @@ var cam :Camera2D
 var cam_zoomed:bool = false
 var dancing:bool = false
 var is_blinking:bool = false
+var is_dead: bool = false
 
 func _ready():
 	cam = get_tree().get_nodes_in_group("main_camera")[0]
@@ -45,6 +46,8 @@ func _physics_process(delta):
 		#make visible spear and addons
 		
 	
+
+	
 	if Input.is_action_just_pressed("exit"):
 		get_tree().quit()
 		
@@ -64,10 +67,10 @@ func _physics_process(delta):
 	
 	#Animation checks
 	
-	if direction_x or direction_y:
+	if direction_x or direction_y and !is_dead:
 		animation_player.play("walk")
 		
-	else:
+	elif !is_dead:
 		animation_player.play("idle")
 	
 	if Input.is_action_just_pressed("spear"):
@@ -91,6 +94,13 @@ func _physics_process(delta):
 		knockback = null
 
 	move_and_slide()
+	
+		#Check hp lvl 
+	if hp <= 0:
+		cam_zoom_in()
+		is_dead = true
+		death()
+		on_player_death.emit()
 
 func attack() ->void:
 	weapon_manager.fire_weapon()
@@ -98,6 +108,8 @@ func attack() ->void:
 
 func death() -> void:
 	animation_player.play("death")
+	animation_player_2.stop()
+	modulate.a = 100
 	weapon_addon.visible = false
 	set_physics_process(false)
 	print("dead")
@@ -126,3 +138,7 @@ func _on_area_2d_area_entered(area):
 		print(area.name)
 		area.queue_free()
 
+
+func cam_zoom_in() -> void:
+	cam.global_position = Vector2(global_position.x,global_position.y)
+	cam.zoom = Vector2(2,2)

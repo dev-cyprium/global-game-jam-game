@@ -78,7 +78,7 @@ func _physics_process(delta):
 
 func _on_timer_timeout():
 	current_attack = attack_opts.pick_random()
-	#current_attack = attack_opts[1]
+	current_attack = attack_opts[1]
 	do_attack(current_attack)
 	
 func do_attack(atk_type):
@@ -101,12 +101,10 @@ func do_attack(atk_type):
 			trails.append(trail)
 			current_target = player
 
-
 func _on_chase_timeout():
 	attack.start()
 	current_target = null
 	state = State.IDLE
-
 
 func death() -> void:
 	pass
@@ -115,6 +113,10 @@ func take_dmg(taken_dmg: float) -> void:
 	hp -= taken_dmg
 	print("Current hp: ", hp)
 
+func stop_moving() -> void:
+	current_target = null
+	state = State.IDLE
+
 func _on_hurtbox_area_entered(area):
 	print(area.name)
 	
@@ -122,7 +124,7 @@ func _on_hurtbox_area_entered(area):
 		take_dmg(area.dmg)
 	if area.is_in_group("player"):
 		print("dmg")
-		area.get_parent().take_dmg(dmg)
+		area.get_parent().take_dmg(dmg, self)
 
 func _on_slime_spawn_timeout():
 	if state == State.CHASE:

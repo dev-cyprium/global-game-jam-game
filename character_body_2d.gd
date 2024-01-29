@@ -7,6 +7,7 @@ const SPEED = 300.0
 var time_passed = 0
 var spear_ammo = 0
 var hp:float
+var knockback = null
 
 @export var max_hp:float = 100.0
 
@@ -85,6 +86,10 @@ func _physics_process(delta):
 		weapon_addon.flip_h = false
 	
 	velocity = Vector2(direction_x, direction_y).normalized() * SPEED
+	
+	if knockback:
+		velocity = knockback * 3000
+		knockback = null
 
 	move_and_slide()
 
@@ -98,10 +103,15 @@ func death() -> void:
 	set_physics_process(false)
 	print("dead")
 
-func take_dmg(dmg: float) -> void:
+func take_dmg(dmg: float, source: CharacterBody2D) -> void:
 	hp -= dmg
 	is_blinking = true
 	on_player_hp_changed.emit(hp)
+	
+	var dir = (global_position - source.global_position).normalized()
+	knockback = dir
+	source.stop_moving()
+	
 	print("Current hp: ", hp)
 
 func heal(amount: float) ->void:

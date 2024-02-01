@@ -8,6 +8,8 @@ var current_target = null
 @export var dmg:float = 10.0
 @export var hp:float = 100.0
 
+
+var trail_scene : PackedScene = preload("res://enemy_trail/trail.tscn")
 @export var marker: PackedScene
 var camera: Camera2D
 @onready var attack = $Attack
@@ -94,9 +96,9 @@ func do_attack(atk_type):
 		Attacks.CHASE:
 			$Chase.start()
 			state = State.CHASE
-			var trail = Line2D.new()
-			trail.width = 10
-			trail.default_color = Color.LAWN_GREEN
+			var trail = trail_scene.instantiate() as Line2D
+			#trail.width = 10
+			#trail.default_color = Color.LAWN_GREEN
 			%Trails.add_child(trail)
 			trails.append(trail)
 			current_target = player
@@ -129,3 +131,4 @@ func _on_hurtbox_area_entered(area):
 func _on_slime_spawn_timeout():
 	if state == State.CHASE:
 		trails[-1].add_point(global_position)
+	
